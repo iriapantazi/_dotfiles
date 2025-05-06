@@ -33,7 +33,6 @@ in
     fzf
     git
     htop
-    # jujutsu
     jq
     kitty
     lazygit
@@ -49,13 +48,9 @@ in
     shfmt
     silver-searcher
     starship
-    # virtualenvwrapper
-    # python-s
     tmux
     tree
-    # zellij
-
-    # install python
+    # for python
     gcc
     gcc.cc.lib
     # installed by nix, not pip
