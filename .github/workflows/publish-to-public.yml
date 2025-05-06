@@ -1,0 +1,40 @@
+name: Publish to Public Repo
+
+on:
+  push:
+    branches:
+      - public-export  # Trigger only on updates to this branch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout private repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # We don't need full history
+
+      - name: Rebuild clean branch
+        run: |
+          # Setup clean repo state
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          # Create orphan branch with no history
+          git checkout --orphan clean-public
+
+          # Remove tracked files
+          git rm -rf .
+
+          # Add current files (still in working tree)
+          git add .
+          git commit -m "Public update: $(date +'%Y-%m-%d %H:%M:%S')"
+
+      - name: Push to public repo
+        env:
+          TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: |
+          git remote add public https://x-access-token:${TOKEN}@github.com/iriapantazi/_dotfiles.git
+          git push -f public clean-public:main
+
