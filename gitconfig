@@ -1,0 +1,53 @@
+[alias]
+  a = add
+  aa = add --all
+  br = branch
+  co = checkout
+  cb = checkout -b
+  cm = commit -m
+  cl = clean -i
+  df = diff --color-words --ignore-space-at-eol -b -w --ignore-blank-lines
+  lg = log --graph --oneline
+  st = status
+  # st = status -u no
+  # stu = status -u all
+  ps = push
+  pl = pull
+  pp = "!f() { \
+            git log --oneline --color=always | \
+            fzf --ansi --no-sort --reverse --preview 'git show --color=always {1}' \
+                --preview-window=right:60% | \
+            awk '{print $1}'; \
+        }; f"
+  w = worktree
+[core]
+  editor = vim
+[user]
+  name = a_name
+  email = an_email@gmail.com
+[credential]
+  helper = store
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[diff]
+    # Set difftastic as the default difftool, so we don't need to specify
+    # `-t difftastic` every time.
+    tool = difftastic
+    algorihtm = histogram
+    external = difft
+
+[difftool "difftastic"]
+    # See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+    # cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+    cmd = difft $LOCAL $REMOTE
+    prompt = false
+[difftastic]
+    display = side-by-side
+[pager]
+    # Use a pager if the difftool output is larger than one screenful,
+    # consistent with the behaviour of `git diff`.
+    difftool = true

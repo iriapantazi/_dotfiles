@@ -1,0 +1,71 @@
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
+
+# Show username
+[username]
+show_always = true
+format = "[╭─$user]($style)@"
+# style_user = "bold bright-blue"
+style_user = "bold bg:color_purple fg:color_bg1"
+style_root = "bg:#9A348E"
+
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol$hostname]($style) in "
+style = "bold fg:color_bg1 bg:color_purple"
+
+# Show the full directory path
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+format = "[$path]($style) "
+style = "cyan"
+
+# Git branch display
+[git_branch]
+format = "[🌱 $branch]($style) "
+style = "bold yellow"
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+[git_status]
+untracked = ""  # Remove the symbol for untracked files
+staged = "+"    # Show "+" for staged files
+modified = "~"  # Use "~" for modified files
+conflicted = "!"  # Use "!" for conflicts
+style = "bold green"  # Default style for Git status
+
+[cmd_duration]
+min_time = 0  # Show duration if the command took at least 2000ms (2 seconds)
+show_milliseconds = true  # Display milliseconds in the duration
+format = " [$duration]($style)"  # Customize how it looks
+style = "bold white"
+# style = "bold yellow"  # Make it stand out
+
+[python]
+format = "[$symbol$version $virtualenv]($style) "
+style = "fg:color_orange bg:#3c3836"
+
+[direnv]
+disabled = false
+symbol = "🌀 "
+format = "[$symbol$dirname]($style) "
+style = "bold blue"
+
+[gcloud]
+disabled = true
+format = "[$symbol$account]($style) "
+style = "fg:#4285f4 bg:#3c3836"
